@@ -2,7 +2,6 @@ package com.myapplicationdev.android.p04_revisionnotes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,8 +23,12 @@ public class SecondActivity extends AppCompatActivity {
 
 		Intent i = getIntent();
 
-		al = new ArrayList<Note>();
-		al.add(new Note());
+		DBHelper db = new DBHelper(SecondActivity.this);
+
+		al = db.getAllNotes();
+
+		aa = new RevisionNotesArrayAdapter(this, R.layout.row, al);
+		lv.setAdapter(aa);
 	}
 
 
