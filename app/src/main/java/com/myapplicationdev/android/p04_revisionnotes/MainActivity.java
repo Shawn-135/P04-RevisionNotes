@@ -10,12 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
 
     EditText editTextNote;
     RadioGroup radioGroupStars;
     Button buttonInsertNote, buttonShowList;
+    ArrayList<Note> al;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
 
                 DBHelper db = new DBHelper(MainActivity.this);
-                // Insert a task
-                db.insertNote(note, stars);
-                db.close();
 
-                Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_SHORT).show();
+                al = db.getAllNotes();
+                boolean exists = false;
+                for(int i = 0; i < al.size(); i++){
+                    if (note.equals(al.get(i).getNoteContent())){
+                        exists = true;
+                    }
+                }
+                if (exists == true){
+                    Toast.makeText(MainActivity.this, "Note already exists.", Toast.LENGTH_SHORT).show();
+                }else {
+                    //insert task
+                    db.insertNote(note, stars);
+                    Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_SHORT).show();
+                }
+
+                db.close();
 
             }
         });//end of buttonInsertNote
