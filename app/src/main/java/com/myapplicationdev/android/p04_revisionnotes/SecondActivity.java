@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,17 +20,19 @@ public class SecondActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//TODO implement the Custom ListView
-		lv = findViewById(R.id.lv);
 
-		Intent i = getIntent();
+		lv = findViewById(R.id.lv);
 
 		DBHelper db = new DBHelper(SecondActivity.this);
 
 		al = db.getAllNotes();
+		db.close();
 
-		aa = new RevisionNotesArrayAdapter(this, R.layout.row, al);
+		Toast.makeText(SecondActivity.this, al.get(0).getNoteContent(), Toast.LENGTH_SHORT).show();
+
+		aa = new RevisionNotesArrayAdapter(SecondActivity.this, R.layout.row, al);
 		lv.setAdapter(aa);
-	}
+	}//end of onCreate
 
 
-}
+}//end of class

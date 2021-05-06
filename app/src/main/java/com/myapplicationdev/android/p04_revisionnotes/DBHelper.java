@@ -34,8 +34,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ COLUMN_NOTECONTENT + " TEXT )";
 		db.execSQL(createTableSql);
 		Log.i("info" ,"created tables");
-
-
 	}
 
 	@Override
@@ -84,7 +82,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		cursor.close();
 		db.close();
 		return tasks;
-
 	}
 
     public ArrayList<String> getNoteContent() {

@@ -31,7 +31,7 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		View rowView = inflater.inflate(resource, parent, false);
+		View rowView = inflater.inflate(R.layout.row, parent, false);
 
 		//Match the UI components with Java variables
 
