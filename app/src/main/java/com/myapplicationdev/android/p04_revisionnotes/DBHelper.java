@@ -61,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	public ArrayList<Note> getAllNotes() {
 		//TODO return records in Java objects
-		ArrayList<Note> tasks = new ArrayList<Note>();
+		ArrayList<Note> notes = new ArrayList<Note>();
 		String selectQuery = "SELECT " + COLUMN_ID + ", "
 				+ COLUMN_NOTECONTENT + ", "
 				+ COLUMN_STARS
@@ -76,12 +76,12 @@ public class DBHelper extends SQLiteOpenHelper {
 				String noteContent = cursor.getString(1);
 				int stars = cursor.getInt(2);
 				Note obj = new Note(id, noteContent, stars);
-				tasks.add(obj);
+				notes.add(obj);
 			} while (cursor.moveToNext());
 		}
 		cursor.close();
 		db.close();
-		return tasks;
+		return notes;
 	}
 
     public ArrayList<String> getNoteContent() {

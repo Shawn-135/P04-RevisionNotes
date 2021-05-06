@@ -14,16 +14,14 @@ import java.util.ArrayList;
 public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 	Context context;
 	ArrayList<Note> notes;
-	int resource;
 	ImageView iv1, iv2, iv3, iv4, iv5;
 	TextView textViewNote;
 
 
-	public RevisionNotesArrayAdapter(Context context, int resource, ArrayList<Note> notes) {
-		super(context, resource, notes);
+	public RevisionNotesArrayAdapter(Context context, int resource, ArrayList<Note> objects) {
+		super(context, resource, objects);
+		this.notes = objects;
 		this.context = context;
-		this.notes = notes;
-		this.resource = resource;
 	}
 
 	@Override
@@ -34,10 +32,15 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		View rowView = inflater.inflate(R.layout.row, parent, false);
 
 		//Match the UI components with Java variables
+		textViewNote = rowView.findViewById(R.id.textViewNote);
+		iv1 = rowView.findViewById(R.id.imageView1star);
+		iv2 = rowView.findViewById(R.id.imageView2star);
+		iv3 = rowView.findViewById(R.id.imageView3star);
+		iv4 = rowView.findViewById(R.id.imageView4star);
+		iv5 = rowView.findViewById(R.id.imageView5star);
+
 
 		Note note = notes.get(position);
-		textViewNote.setText(note.getNoteContent());
-
 		int stars = note.getStars();
 
 		//Check if the property for starts >= 5, if so, "light" up the stars
@@ -78,6 +81,8 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 			iv2.setImageResource(android.R.drawable.btn_star_big_on);
 			iv1.setImageResource(android.R.drawable.btn_star_big_on);
 		}
+
+		textViewNote.setText(note.getNoteContent());
 
 		return rowView;
 	}
